@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stickman Combat Dashboard</title>
+  <style>
+    body {
+      background:#0e0e0e;
+      color:#eee;
+      font-family: Arial;
+    }
+    .box {
+      background:#1e1e1e;
+      padding:15px;
+      margin:10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>⚔️ Stickman Combat Dashboard</h1>
+
+<div class="box">
+  <h2>Weapons</h2>
+  <ul id="weapons"></ul>
+</div>
+
+<div class="box">
+  <h2>Moves</h2>
+  <ul id="moves"></ul>
+</div>
+
+<script>
+fetch("http://127.0.0.1:8000/weapons")
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(w => {
+      document.getElementById("weapons").innerHTML +=
+        `<li>${w[0]} | Damage: ${w[1]} | Range: ${w[3]}</li>`;
+    });
+  });
+
+fetch("http://127.0.0.1:8000/moves")
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(m => {
+      document.getElementById("moves").innerHTML +=
+        `<li>${m[0]} | Stamina: ${m[1]} | Multiplier: ${m[2]}</li>`;
+    });
+  });
+</script>
+
+</body>
+</html>
+
